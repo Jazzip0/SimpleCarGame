@@ -1,14 +1,14 @@
 function Car(x,y,w,h,c){
-PIXI.DisplayObjectContainer.call(this); //create container for all graphics 
+PIXI.Container.call(this); //create container for all graphics 
 host.pixi.stage.addChild(this);
 this.x = x;
 this.y = y;
 this.h = h;
 this.w = w;
-this.c = c;	
+this.c = c;
 //this.addChild(host.pixi.createRect(0,0,w ,h ,host.pixi.rgb2hex(200,0,0))); //TODO create better fitting hitbox
 
-this.brakeLights = new PIXI.DisplayObjectContainer();
+this.brakeLights = new PIXI.Container();
 this.brakeLights.addChild(host.pixi.createRect(w * 0.05,0,w * 0.2,h * 0.1,host.pixi.rgb2hex(200,0,0))); //left light;
 this.brakeLights.addChild(host.pixi.createRect(w * 0.75,0,w * 0.2,h * 0.1,host.pixi.rgb2hex(200,0,0))); //left light;
 this.smallestDist = -1;
@@ -22,7 +22,7 @@ this.smallestDistX_R = -1;
 this.speed = 0;
 }
 
-Car.prototype = PIXI.DisplayObjectContainer.prototype;
+Car.prototype = PIXI.Container.prototype;
 
 Car.prototype.remove = function(other){
 	host.pixi.stage.removeChild(this);
@@ -127,7 +127,7 @@ Car.prototype.collision =function(){
 						this.remove(element);
 					if(element.y > -element.h) //also remove other car when it is visible on screen
 						element.remove(this);
-				
+
 				return;
 			}else if(distY > 0 && (distY < this.smallestDist || this.smallestDist == -1 )){
 				this.smallestDist = distY - this.h / 2 - element.h / 2;

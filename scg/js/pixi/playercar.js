@@ -17,7 +17,7 @@ function PlayerCar(id,c){ //constructor
 	this.timeOffset = Math.PI * Math.random();
 	this.centerY = this.y;
 	this.move = {x:0,y:0};
-	this.lifeCars = new PIXI.DisplayObjectContainer();
+	this.lifeCars = new PIXI.Container();
 	this.updateHeightLifeCars(host.pixi.players.length);
 	this.addLifes(10);
 	host.pixi.stage.addChild(this.lifeCars);
@@ -37,7 +37,7 @@ function PlayerCar(id,c){ //constructor
 	}, lengthTimer);
 	this.left = 37; //set left standart to left key
 	this.right = 39; ///set right standard to right key
-	
+
 
 }
 PlayerCar.prototype = Object.create(Car.prototype);
@@ -56,7 +56,7 @@ PlayerCar.prototype.display = function(){
 				this.x += this.maxMove;
 		}else
 		this.x += this.move.x;
-	}	
+	}
 	this.y = this.centerY + Math.sin(this.timeOffset + host.pixi.frames / 200) * this.h;
 }
 
@@ -85,5 +85,3 @@ PlayerCar.prototype.addLifes = function(amount) {
 		this.lifeCars.addChild(new LifeCar(this.lifeCars.children.length,this.c,this));
 	}
 };
-
-

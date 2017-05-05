@@ -1,16 +1,16 @@
 function Host(){
 	var self = this;
 	this.pixi = new Pixi();
-	
-	
-	
+
+
+
 	$("#title").fitText(.8);
 	this.mobile = (/iphone|ipad|ipod|android|blackberry|mobile|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
 	this.seedRoom = new SeedRoom();
-	this.socket = new Socket(this.seedRoom.seed); //TODO do I want this also on mobile devices?	
+	this.socket = new Socket(this.seedRoom.seed); //TODO do I want this also on mobile devices?
 	if(!this.mobile){ //only for desctop
 		this.setDatGui();
-		this.setAnimation();
+		//this.setAnimation(); //TODO
 	}else{
 		this.datVars = new this.getVariables();
 		$('#linktoroom').css("display","none");
@@ -25,7 +25,7 @@ Host.prototype.startGame = function() {
 	host.pixi.players.forEach(function(player){
 		player.lifesActivated = true;
 
-	});	
+	});
 
 	host.pixi.startFrame = host.pixi.frames; //start game by setting the time (game gets harder when the differnce between frames and startframe increases)
 };
@@ -63,16 +63,16 @@ Host.prototype.getVariables = function() {
 	this.maxAcceleration = 0.2;
 }
 
-Host.prototype.setAnimation = function() {
-	var elements = document.getElementsByClassName("baddplayer");
-	var keyframes = [{top: $(window).height()},{top: 0}];
-	var self = this;
-	for(var i=0; i<elements.length; i++) {
-		var anim = new Animation(elements[i],keyframes,{duration:700,delay:(100 *  i),easing:'cubic-bezier(0.660, 0.495, 0.670, 1.320)'});
-		var player = document.timeline.play(anim);
-		elements[i].addEventListener('click',this.addPlayer,false);
-	}
-};
+// Host.prototype.setAnimation = function() { //TODO
+// 	var elements = document.getElementsByClassName("baddplayer");
+// 	var keyframes = [{top: $(window).height()},{top: 0}];
+// 	var self = this;
+// 	for(var i=0; i<elements.length; i++) {
+// 	//	var anim = new Animation(elements[i],keyframes,{duration:700,delay:(100 *  i),easing:'cubic-bezier(0.660, 0.495, 0.670, 1.320)'});
+// 		var player = document.timeline.play(anim);
+// 		elements[i].addEventListener('click',this.addPlayer,false);
+// 	}
+// };
 
 Host.prototype.addPlayer = function(event){
 	if(this.isAdded == undefined || !this.isAdded){
@@ -131,7 +131,7 @@ Host.prototype.addPlayer = function(event){
 				if(code > 96 && code < 108)//fix for numpad //TODO correct fix
 					code -= 48;
 				console.debug(code);
-				
+
 				self.left.childNodes[1].childNodes[1].innerHTML = host.correctChars(String.fromCharCode(code).toLowerCase());
 			});
 			self.selected = true;
@@ -196,5 +196,3 @@ Host.prototype.correctChars = function(char) {
 			return '<i class="fa fa-exclamation-circle"></i>'
 		return char;
 	};
-
-

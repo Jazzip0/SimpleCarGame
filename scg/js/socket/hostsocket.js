@@ -1,7 +1,7 @@
 function Socket(seed){
 
 	var self = this;
-	self.socket = io("http://joepschyns.me:8000");
+	self.socket = io("https://joepschyns.me:8000");
 	self.socket.on('connect', function(){ //do stuff when connection is succesfull
 	console.log("connection");
 	self.socket.emit("createRoom",seed);//create room on server
@@ -33,7 +33,7 @@ function Socket(seed){
 			host.pixi.paused = true;
 
 	});
-	
+
 }
 
 Socket.prototype.feedback = function(feedback,id) {

@@ -2,12 +2,11 @@
 <html>
 <title>controls</title>
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=no" minimal-ui>
-<link rel="import" href="/scg/components/bower_components/font-roboto/roboto.html">
-<link rel="import" href="/scg/components/bower_components/paper-button/paper-button.html">
-<link rel="import" href="/scg/components/bower_components/paper-toggle-button/paper-toggle-button.html">
-<link rel="import" href="/scg/components/bower_components/paper-input/paper-input.html">
-<link rel="import" href="/scg/components/bower_components/paper-dialog/paper-dialog.html">
-<link rel="manifest" href="WebAppManifest.json">
+<link rel="import" href="/scg/bower_components/font-roboto/roboto.html">
+<link rel="import" href="/scg/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/scg/bower_components/paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="/scg/bower_components/paper-input/paper-input.html">
+<link rel="import" href="/scg/bower_components/paper-dialog/paper-dialog.html"> <link rel="manifest" href="WebAppManifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="shortcut icon" type="image/png" href="images/favicon.png">
@@ -15,9 +14,10 @@
 <link rel="icon" sizes="192x192" href="joep/images/large_favicon.png">
 <script src="/joep/js/jquery.js" type="text/javascript"></script>
 <script src="/scg/js/jquery.animate-colors-min.js" type="text/javascript"></script>
-<script src="http://joepschyns.me:8000/socket.io/socket.io.js"></script>
+<script src="https://joepschyns.me:8000/socket.io/socket.io.js"></script>
 <script type="text/javascript" src="/scg/js/socket/playersocket.js"></script>
-<link rel="stylesheet" href="/scg/font-awesome-4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 <script type="text/javascript">
 function Controller(){
 	this.inGameTime = 0;
@@ -59,11 +59,11 @@ function Controller(){
 	this.orientationSupport;
 	this.useAccel = false;
 
-	if (window.DeviceOrientationEvent) 
+	if (window.DeviceOrientationEvent)
 		window.addEventListener('deviceorientation', this.getOrientation, false);
-	else 
+	else
 		this.orientationNotSupported();
-	
+
 }
 Controller.prototype.getRoomNumber= function(){ //look for cookies and get saved seed
 	var cookieCrumb = document.cookie.split('=');
@@ -131,7 +131,7 @@ Controller.prototype.changeLifes = function(lifes){
 			this.animateBackground("#9bfd92"); //flash green
 		else
 			this.animateBackground("#fd9292"); //flash red
-		
+
 	}else{ //if is dead
 		if(this.counter !== undefined)
 			clearInterval(this.counter);
@@ -166,18 +166,18 @@ Controller.prototype.pauseunpause = function() { //reverse pause
 	else
 		$("#pause").html('<i class="fa fa-pause"></i>'); //set pause icon
 };
-Controller.prototype.setRoomNumber = function() {	
+Controller.prototype.setRoomNumber = function() {
 	var value = document.getElementById('roomnumber').value;
 
 	if( value.length == 0){
 		document.getElementById('roomnumberdecor').isInvalid = true;
 	}else{
 		var valid = document.getElementById('roomnumber').validity.valid;
-		document.getElementById('roomnumberdecor').isInvalid  = !valid; 
+		document.getElementById('roomnumberdecor').isInvalid  = !valid;
 		console.debug(document.getElementById('roomnumber').validity);
 		if(valid){
 			this.socket.connectWithSeedToRoom(value);
-		} 
+		}
 	}
 };
 
@@ -197,7 +197,7 @@ $(function(){ //do stuff when page has loaded
 				controller.useAccel = true;
 				$('#RB').css("display","none");
 				$('#LB').css("display","none");
-				
+
 			}
 		});
 	}
@@ -207,7 +207,7 @@ $(function(){ //do stuff when page has loaded
 	$('#LB').bind('touchstart',function(){controller.socket.input(-1)});//start moving left
 	$('#LB').bind('touchend',function(){controller.socket.input(0); });//start moving left
 
-	
+
 
 });
 
@@ -258,7 +258,7 @@ paper-toggle-button{
 	border-radius: 2px;
 	font-size: 0.9em;
 	color: #fff;
-	
+
 }
 
 .button > paper-ripple {

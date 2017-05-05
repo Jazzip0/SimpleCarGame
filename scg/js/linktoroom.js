@@ -3,7 +3,7 @@
 function SeedRoom(){
 
 	this.seed = this.getSeed();
-	this.link = "http://www.joepschyns.me/controller/controller.php?s=" + this.seed ;
+	this.link = "https://www.joepschyns.me/controller/controller.php?s=" + this.seed ;
 	
 
 	//set up content for user
@@ -18,7 +18,7 @@ SeedRoom.prototype.createQR = function() {
 
 
 	$.getJSON(
-		"http://api.bitly.com/v3/shorten?callback=?", 
+		"https://api-ssl.bitly.com/v3/shorten?callback=?", 
 		{ 
 			"format": "json",
 			"apiKey": "R_eeceebf74ae64028a7dd8cb91daa4586",

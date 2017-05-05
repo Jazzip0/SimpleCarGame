@@ -1,7 +1,7 @@
 function Socket (seed,player) {
 	var self = this;
 	this.seed = seed;
-	this.socket = io("http://joepschyns.me:8000");
+	this.socket = io("https://joepschyns.me:8000");
 	this.socket.on('connect', function(){ //do stuff when connection is succesfull
 		self.connectToRoom();
 	});

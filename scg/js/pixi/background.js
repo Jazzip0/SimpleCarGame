@@ -1,8 +1,8 @@
 function Background(w,h,margin){
 	this.margin = margin;
 	this.h = h;
-	PIXI.DisplayObjectContainer.call(this); //create container for all graphics 
-	var totalFences = 8; 
+	PIXI.Container.call(this); //create container for all graphics
+	var totalFences = 8;
 
 
 	this.grassL = new PIXI.Graphics();
@@ -36,7 +36,7 @@ function Background(w,h,margin){
 
 	}
 
-	Background.prototype = PIXI.DisplayObjectContainer.prototype;
+	Background.prototype = PIXI.Container.prototype;
 
 	Background.prototype.fences = [];
 
@@ -45,7 +45,8 @@ function Background(w,h,margin){
 	Background.prototype.update = function() {
 		this.fences.forEach(function(f){
 			f.y += this.MINSPEED;
-			if(f.y > host.pixi.height)
+			console.debug("host.pixi.height ipv 1080");
+			if(f.y > 1080)
 				f.y = -100;
 		}.bind(this));
 	};

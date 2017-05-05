@@ -1,5 +1,5 @@
 function Pixi(){
-	
+
 	this.amountOfCars = 0;
 	this.paused = false;
 	this.frames = 0;
@@ -16,11 +16,13 @@ function Pixi(){
 	self.height = $(window).height();
 	this.MARGIN = 200 * this.width / 1920;
 	self.renderer = new PIXI.autoDetectRenderer(self.width,self.height,null,false,true);
+	self.renderer.backgroundColor = 0xC8C8C8;
 	$('#game').append(this.renderer.view);
-	self.stage = new PIXI.Stage(0xC8C8C8);
+	self.stage = new PIXI.Container();
+	console.debug(Background);
 	this.background = new Background(self.width,self.height,this.MARGIN);
 	self.stage.addChild(this.background);
-	this.brakeLineLayer = new PIXI.DisplayObjectContainer();
+	this.brakeLineLayer = new PIXI.Container();
 	self.stage.addChild(this.brakeLineLayer);
 
 	this.text = new PIXI.Text("",{font:"30px Arial", fill:"red"});
@@ -46,7 +48,7 @@ function Pixi(){
 
 			if(self.startFrame != -1){ //if a game is running
 			var currentRunTime = (self.frames - self.startFrame) / 60; //current run time given an average of 60fps
-			self.text.setText(Math.round(currentRunTime));
+			self.text = Math.round(currentRunTime);
 			var tempAmountOfCars = Math.round((Math.round( currentRunTime / 10)  - currentRunTime / 10) * 1000) / 1000;
 			if(tempAmountOfCars == 0){ //start with 25 cars and add every 10 seconds a new car
 				self.addSelfDrivingCars(1);
@@ -54,7 +56,7 @@ function Pixi(){
 			}
 		}
 		if(!self.paused)
-			requestAnimFrame(self.animate);
+			requestAnimationFrame(self.animate);
 	}
 
 	this.selfDrivingCars = [];
@@ -67,7 +69,7 @@ function Pixi(){
 		self.MARGIN = 200* (self.width / 1920);
 		self.background.resize();
 	});
-	requestAnimFrame(this.animate);
+	requestAnimationFrame(this.animate);
 }
 Pixi.prototype.collisionCheck = function() {
 	var checkCars = this.collisionCars.slice();
@@ -103,11 +105,11 @@ Pixi.prototype.collisionCheck = function() {
 				}
 			}
 		}
-		car0.text.setText(car0.smallestDist + "");
+		car0.text = car0.smallestDist + "";
 	}
 };
 Pixi.prototype.startAnim = function() {
-	requestAnimFrame(this.animate);
+	requestAnimationFrame(this.animate);
 };
 Pixi.prototype.removePlayer = function(id) {
 	var index = $.map(host.pixi.players, function(obj, index) {if(obj.id == id) {return index;}});
@@ -243,13 +245,13 @@ Pixi.prototype.hex2hsl = function(hex) {
 	}
 
 	Pixi.prototype.addNonNormalCar = function(){
-		
+
 		if(Math.round(Math.random() * 10) == 0)//1% chance on a ambulance
 			host.pixi.selfDrivingCars.push(new AmbuCar());
 		else if(Math.round(Math.random() * 5) == 0)//1% chance on a truck
 			host.pixi.selfDrivingCars.push(new Truck());
 		else
-			return false;	
+			return false;
 		return true;
 	}
 

@@ -1,5 +1,5 @@
 function BrakeLine(car){
-	PIXI.DisplayObjectContainer.call(this); //extend graphics pixi
+	PIXI.Container.call(this); //extend graphics pixi
 	this.x = car.x;
 	this.y = car.y;
 	this.car = car;
@@ -13,7 +13,7 @@ function BrakeLine(car){
 	host.pixi.brakeLines.push(this);
 }
 
-BrakeLine.prototype = Object.create(PIXI.DisplayObjectContainer.prototype)
+BrakeLine.prototype = Object.create(PIXI.Container.prototype)
 
 BrakeLine.prototype.MINSPEED = 1;
 
@@ -24,7 +24,7 @@ BrakeLine.prototype.update = function() {
 			this.left.height = length;
 	}else
 		this.attached = false;;
-	
+
 	this.y += this.MINSPEED;
 	if(this.y > host.pixi.height)
 		this.remove();
