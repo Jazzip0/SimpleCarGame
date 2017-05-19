@@ -305,13 +305,14 @@ html /deep/ paper-dialog {
 
 </style>
 <body>
-	<paper-dialog id="noroomdialog"  heading="Fill in your room number"  transition="paper-dialog-transition-bottom" autoCloseDisabled>
-	<template is="auto-binding">
-		<paper-input-decorator id="roomnumberdecor" label="xxxx" error="did you fill in the correct room number?">
-		<input id="roomnumber" is="core-input"  pattern="[0-9]{3,5}" maxlength="4">
-	</paper-input-decorator>
-	<paper-button affirmative onclick="controller.setRoomNumber();">Accept</paper-button>
-</template>
+<paper-dialog id="noroomdialog"  heading="Fill in your room number"  transition="paper-dialog-transition-bottom" autoCloseDisabled>
+	<div class="md-dialog-content">
+	<h3>Fill in your room number</h3>
+			<paper-input-decorator id="roomnumberdecor" label="xxxx" error="did you fill in the correct room number?">
+			<input id="roomnumber" is="core-input"  pattern="[0-9]{3,5}" maxlength="4">
+			</paper-input-decorator>
+		<paper-button affirmative onclick="controller.setRoomNumber();">Accept</paper-button>
+	</div>
 </paper-dialog>
 <!-- pause button -->
 <div id="pause" class="button raised" onclick="controller.pauseunpause();">
